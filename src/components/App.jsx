@@ -6,15 +6,20 @@ import { FindContacts } from './FindContacts';
 import { nanoid } from 'nanoid';
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Rormione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
     name: '',
     number: '',
+  };
+
+  constructor(props) {
+    super(props);
+    const contacts = JSON.parse(this.props.localStorageContacts);
+    if (contacts.length > 0) this.state.contacts = contacts;
+  }
+
+  saveToLocalStorage = () => {
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
   };
 
   handleSubmit = event => {
@@ -29,10 +34,11 @@ export class App extends Component {
     }
   };
 
-  handleDelete = id => {
-    this.setState({
+  handleDelete = async id => {
+    await this.setState({
       contacts: this.state.contacts.filter(contact => contact.id !== id),
     });
+    this.saveToLocalStorage();
   };
 
   searchContacts = data => {
@@ -41,8 +47,8 @@ export class App extends Component {
     );
   };
 
-  handleChange = event => {
-    this.setState({
+  handleChange = async event => {
+    await this.setState({
       [event.target.name]: event.target.value,
     });
   };
@@ -52,10 +58,11 @@ export class App extends Component {
     this.searchContacts(event.target.value);
   };
 
-  addContact = data => {
-    this.setState(state => ({
+  addContact = async data => {
+    await this.setState(state => ({
       contacts: [...state.contacts, data],
     }));
+    this.saveToLocalStorage();
   };
 
   render() {
