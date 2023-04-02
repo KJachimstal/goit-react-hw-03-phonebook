@@ -15,7 +15,7 @@ export class App extends Component {
   constructor(props) {
     super(props);
     const contacts = JSON.parse(this.props.localStorageContacts);
-    if (contacts.length > 0) this.state.contacts = contacts;
+    if (contacts !== null) this.state.contacts = contacts;
   }
 
   saveToLocalStorage = () => {
