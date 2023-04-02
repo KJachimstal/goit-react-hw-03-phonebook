@@ -1,0 +1,33 @@
+.comtainer {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  border-radius: 10px;
+  border: 1px solid darkblue;
+  padding: 15px;
+}
+
+.form-button {
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 25px;
+  margin-top: 30px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  height: 50px;
+  border-radius: 10px;
+  font-size: 25px;
+  margin-left: 20px;
+}
+
+.form-input[type=text] {
+  padding-left: 10px;
+}
